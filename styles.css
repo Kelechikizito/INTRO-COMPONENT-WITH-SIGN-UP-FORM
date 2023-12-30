@@ -91,7 +91,7 @@ input {
 input:focus {
     outline: none !important;
     border: 0.09rem solid hsl(248, 32%, 49%);
-  }
+}
 
 .first-span {
     color: rgba(255, 255, 255, 0.605);
@@ -101,6 +101,17 @@ input:focus {
     color: hsl(0, 100%, 74%);
 }
 
+span.error, .first, .second, .third, .fourth {
+    font-style: italic;
+    font-size: x-small;
+    text-align: right;
+    margin: 0 2rem;
+    color: hsl(0, 100%, 74%);
+    position: relative;
+    bottom: 0.3rem;
+    display: none;
+}
+
 .invalid-input:invalid {
     border: 0.1rem solid hsl(0, 100%, 74%);
     background-image: url(/images/icon-error.svg);
@@ -108,18 +119,19 @@ input:focus {
     background-position: 92% center;
 }
 
-.update-placeholder:invalid::placeholder {
+.invalid-email:invalid::placeholder {
     font-family: 'Poppins', sans-serif;
     color: hsl(0, 100%, 74%);
 }
 
-/* 
-input:required:focus {
+input:focus:invalid {
     outline: none; 
     border-color: initial; 
     box-shadow: none; 
 }
 
+
+/* 
 input:required:invalid {
     box-shadow: none;
 } */

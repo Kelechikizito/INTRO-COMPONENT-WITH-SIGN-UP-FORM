@@ -34,11 +34,15 @@
           <p>Try it free 7 days <span class="first-span">then $20/mo. thereafter</span></p>
         </div>
 
-        <form action="" class="second-item form-container">
+        <form action="" class="second-item form-container" novalidate>
           <input type="text" name="firstName" id="firstName" placeholder="First Name" class="form-item" required>
+          <span class="first error">First Name cannot be empty</span>
           <input type="text" name="lastName" id="lastName" placeholder="Last Name"  class="form-item" required>
+          <span class="second error">Last Name cannot be empty</span>
           <input type="email" name="email" id="email" placeholder="Email Address" class="form-item" required>
+          <span class="third error">Looks like this is not an email</span>
           <input type="password" name="password" id="password" placeholder="Password" class="form-item" required>
+          <span class="fourth error">Password cannot be empty</span>
           <button type="submit" class="form-item">CLAIM YOUR FREE TRIAL</button>
           <p class="form-item">By clicking the button, you are agreeing to our <span class="second-span">Terms and Services</span></p>
         </form>
