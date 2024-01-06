@@ -1,77 +1,52 @@
 
 const form = $('form');
-const firstName = $("input[name='firstName']");
-const lastName = $("input[name='lastName']");
-const email = $("input[name='email']");
-const password = $("input[name='password']");
+const inputs = {
+  firstName: $("input[name='firstName']"),
+  lastName: $("input[name='lastName']"),
+  email: $("input[name='email']"),
+  password: $("input[name='password']"),
+};
 const btn = $('button');
-const firstErr = $('.first');
-const secondErr = $('.second');
-const thirdErr = $('.third');
-const fourthErr = $('.fourth');
+const errors = {
+  first: $('.first'),
+  second: $('.second'),
+  third: $('.third'),
+  fourth: $('.fourth'),
+};
 
-function validateFName() {
-    const isFNameValid = firstName[0].validity.valid;
+function validateInput(input, errorElement, placeholder = '') {
+  const isValid = input[0].validity.valid;
 
-    if (!isFNameValid) {
-        firstErr.css('display', 'inline-block');
-        firstName.addClass('invalid-input');
-        firstName.removeAttr('placeholder');
-    } else {
-        firstErr.css('display', 'none');
-        firstName.removeClass('invalid-input');
-        firstName.attr('placeholder', 'First Name');
-    }
-}
-
-function validateLName() {
-     const isLNameValid = lastName[0].validity.valid;
-
-     if (!isLNameValid) {
-        secondErr.css('display', 'inline-block');
-        lastName.addClass('invalid-input');
-        lastName.removeAttr('placeholder');
-     } else {
-        secondErr.css('display', 'none');
-        lastName.removeClass('invalid-input');
-        lastName.attr('placeholder', 'Last Name');
-     }
+  if (!isValid) {
+    errorElement.css('display', 'inline-block');
+    input.addClass('invalid-input');
+    input.removeAttr('placeholder');
+  } else {
+    errorElement.css('display', 'none');
+    input.removeClass('invalid-input');
+    input.attr('placeholder', placeholder);
+  }
 }
 
 function validateEmail() {
-    const isEmailValid = email[0].validity.valid;
+  const isValid = inputs.email[0].validity.valid;
 
-    if (!isEmailValid) {
-        thirdErr.css('display', 'inline-block');
-        email.addClass('invalid-input');
-        email.attr('placeholder', 'name@host.tld');
-        email.addClass('invalid-email');
-    } else {
-        thirdErr.css('display', 'none');
-        email.removeClass('invalid-input invalid-email');
-    }
+  if (!isValid) {
+    errors.third.css('display', 'inline-block');
+    inputs.email.addClass('invalid-input invalid-email');
+    inputs.email.attr('placeholder', 'name@host.tld');
+  } else {
+    errors.third.css('display', 'none');
+    inputs.email.removeClass('invalid-input invalid-email');
+  }
 }
 
-function validatePassword() {
-    const isPasswordValid = password[0].validity.valid;
-
-    if (!isPasswordValid) {
-        fourthErr.css('display', 'inline-block');
-        password.addClass('invalid-input');
-        password.removeAttr('placeholder');
-    } else {
-        fourthErr.css('display', 'none');
-        password.removeClass('invalid-input');
-        password.attr('placeholder', 'Password');
-    }
-}
-
-btn.click(function (e) { 
-    if (!form[0].checkValidity()) {
-        validateFName();
-        validateLName();
-        validateEmail();
-        validatePassword();
-        e.preventDefault();     
-    } 
+btn.click(function (e) {
+  if (!form[0].checkValidity()) {
+    validateInput(inputs.firstName, errors.first, 'First Name');
+    validateInput(inputs.lastName, errors.second, 'Last Name');
+    validateEmail();
+    validateInput(inputs.password, errors.fourth, 'Password');
+    e.preventDefault();
+  }
 });
